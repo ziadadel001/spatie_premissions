@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\permissionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+
+    //* permissions routes for show and create 
+    Route::get('/permissions', [permissionController::class, 'index'])->name('permission.index');
+    Route::get('/permissions/create', [permissionController::class, 'create'])->name('permission.create');
+    Route::post('/permissions', [permissionController::class, 'store'])->name('permission.store');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
