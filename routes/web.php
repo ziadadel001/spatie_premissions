@@ -65,11 +65,17 @@ Route::middleware('auth')->group(function () {
 
 
 
-    //* Users routes for showlist 
+    //* Users routes for showlist and create one
     Route::get('/Users', [UserController::class, 'index'])->name('user.index');
+    Route::get('/Users/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('/Users', [UserController::class, 'store'])->name('user.store');
+
     //* Users routes for edit and update 
     Route::get('/Users/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::post('/Users/{id}', [UserController::class, 'update'])->name('user.update');
+
+    //* Users routes for destroy
+    Route::delete('/Users', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
 require __DIR__ . '/auth.php';

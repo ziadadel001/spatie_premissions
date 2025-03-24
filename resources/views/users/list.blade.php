@@ -4,7 +4,10 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Users') }}
         </h2>
-        {{-- <a href="{{ route('user.create') }}" class="bg-slate-700 text-sm rounded-md text-white px-3 py-2">Create</a> --}}
+        @can('create users')
+        <a href="{{ route('user.create') }}" class="bg-slate-700 text-sm rounded-md text-white px-3 py-2">Create</a>
+
+        @endcan
       </div>
     </x-slot>
 
@@ -49,7 +52,10 @@
                     <a href="{{ route('user.edit',$user->id) }}" class="bg-slate-700 text-sm rounded-md text-white px-3 py-2 hover:bg-slate-600">Edit</a>
 
                     @endcan
-                    {{-- <a href="javascript:void(0);" onclick="deleteuser({{ $user->id }})" class="bg-red-600 text-sm rounded-md text-white px-3 py-2 hover:bg-red-500">Delete</a> --}}
+                    @can('delete users')
+                    <a href="javascript:void(0);" onclick="deleteuser({{ $user->id }})" class="bg-red-600 text-sm rounded-md text-white px-3 py-2 hover:bg-red-500">Delete</a>
+   
+                    @endcan
 
                 </td>
             </tr>
@@ -66,7 +72,7 @@
         </div>
     </div>
     <x-slot name="script">
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
 function deleteuser(id){
 if(confirm('Are You Sure you want to delete?')){
 $.ajax({
@@ -84,7 +90,7 @@ window.location.href = '{{ route('user.index') }}';
 });
 }
 }
-    </script>    --}}
+    </script>   
      </x-slot>
 
 </x-app-layout>
