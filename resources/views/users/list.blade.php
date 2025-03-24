@@ -45,7 +45,10 @@
                 <td class="px-6 py-3 text-left">{{ $user->roles->pluck('name')->implode(', ') }}</td>
                 <td class="px-6 py-3 text-left">{{ $user->created_at->format('d M,Y') }}</td>
                 <td class="px-6 py-3 text-center">
+                    @can('edit users')
                     <a href="{{ route('user.edit',$user->id) }}" class="bg-slate-700 text-sm rounded-md text-white px-3 py-2 hover:bg-slate-600">Edit</a>
+
+                    @endcan
                     {{-- <a href="javascript:void(0);" onclick="deleteuser({{ $user->id }})" class="bg-red-600 text-sm rounded-md text-white px-3 py-2 hover:bg-red-500">Delete</a> --}}
 
                 </td>

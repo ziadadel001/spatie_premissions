@@ -4,7 +4,11 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Articles') }}
         </h2>
+        @can('create articles')
+            
         <a href="{{ route('article.create') }}" class="bg-slate-700 text-sm rounded-md text-white px-3 py-2">Create</a>
+        @endcan
+
       </div>
     </x-slot>
 
@@ -41,8 +45,15 @@
                 <td class="px-6 py-3 text-left">{{ $article->auther }}</td>
                 <td class="px-6 py-3 text-left">{{ $article->created_at->format('d M,Y') }}</td>
                 <td class="px-6 py-3 text-center">
+                    @can('edit articles')
                     <a href="{{ route('article.edit',$article->id) }}" class="bg-slate-700 text-sm rounded-md text-white px-3 py-2 hover:bg-slate-600">Edit</a>
+ 
+                    @endcan
+
+                    @can('delete articles')
                     <a href="javascript:void(0);" onclick="deletearticle({{ $article->id }})" class="bg-red-600 text-sm rounded-md text-white px-3 py-2 hover:bg-red-500">Delete</a>
+
+                    @endcan
 
                 </td>
             </tr>
