@@ -41,8 +41,8 @@
                 <td class="px-6 py-3 text-left">{{ $article->auther }}</td>
                 <td class="px-6 py-3 text-left">{{ $article->created_at->format('d M,Y') }}</td>
                 <td class="px-6 py-3 text-center">
-                    {{-- <a href="{{ route('article.edit',$article->id) }}" class="bg-slate-700 text-sm rounded-md text-white px-3 py-2 hover:bg-slate-600">Edit</a>
-                    <a href="javascript:void(0);" onclick="deletearticle({{ $article->id }})" class="bg-red-600 text-sm rounded-md text-white px-3 py-2 hover:bg-red-500">Delete</a> --}}
+                    <a href="{{ route('article.edit',$article->id) }}" class="bg-slate-700 text-sm rounded-md text-white px-3 py-2 hover:bg-slate-600">Edit</a>
+                    <a href="javascript:void(0);" onclick="deletearticle({{ $article->id }})" class="bg-red-600 text-sm rounded-md text-white px-3 py-2 hover:bg-red-500">Delete</a>
 
                 </td>
             </tr>
@@ -59,7 +59,7 @@
         </div>
     </div>
     <x-slot name="script">
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
 function deletearticle(id){
 if(confirm('Are You Sure you want to delete?')){
 $.ajax({
@@ -77,7 +77,7 @@ window.location.href = '{{ route('article.index') }}';
 });
 }
 }
-    </script>    --}}
+    </script>   
      </x-slot>
 
 </x-app-layout>

@@ -41,7 +41,7 @@ class ArticleController extends Controller
         if ($validator->passes()) {
             $article = new Article();
             $article->title = $request->title;
-            $article->text = $request->content;
+            $article->text = $request->text;
             $article->auther = $request->author;
             $article->save();
 
@@ -51,20 +51,15 @@ class ArticleController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $article = Article::findOrFail($id);
+        return view('articles.edit', compact('article'));
     }
 
     /**
@@ -72,14 +67,47 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $article = Article::findOrFail($id);
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'title' => 'required|min:10',
+                'author' => 'required|min:10',
+            ]
+        );
+
+        if ($validator->passes()) {
+            $article->title = $request->title;
+            $article->text = $request->text;
+            $article->auther = $request->author;
+            $article->save();
+
+            return redirect()->route('article.index')->with('success', 'Article Updated successfully.');
+        } else {
+            return redirect()->route('article.edit', $id)->withInput()->withErrors($validator);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        $article = Article::find($id);
+
+        if ($article == null) {
+            session()->flash('error', 'Article not found');
+            return response()->json([
+                'status' => false
+            ]);
+        }
+
+        $article->delete();
+        session()->flash('success', 'Article deleted successfully');
+        return response()->json([
+            'status' => true
+        ]);
     }
 }

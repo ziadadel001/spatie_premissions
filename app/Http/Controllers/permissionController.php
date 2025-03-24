@@ -54,7 +54,7 @@ class permissionController extends Controller
 
         // validate the permission name 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|unique:permissions,name,.$id.,id'
+            'name' => 'required|min:3|unique:permissions,name,'.$id.',id'
         ]);
 
         if ($validator->passes()) {

@@ -56,11 +56,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/articles', [ArticleController::class, 'store'])->name('article.store');
 
     //* articles routes for edit and update 
-    // Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit');
-    // Route::post('/articles/{id}', [ArticleController::class, 'update'])->name('article.update');
+    Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit');
+    Route::post('/articles/{id}', [ArticleController::class, 'update'])->name('article.update');
 
     //* articles routes for destroy
-    // Route::delete('/articles', [ArticleController::class, 'destroy'])->name('article.destroy');
+    Route::delete('/articles', [ArticleController::class, 'destroy'])->name('article.destroy');
 });
 
 require __DIR__ . '/auth.php';
