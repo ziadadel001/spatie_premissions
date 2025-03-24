@@ -19,10 +19,14 @@ Route::middleware('auth')->group(function () {
 
 
 
-    //* permissions routes for show and create 
+    //* permissions routes for showlist and create one
     Route::get('/permissions', [permissionController::class, 'index'])->name('permission.index');
     Route::get('/permissions/create', [permissionController::class, 'create'])->name('permission.create');
     Route::post('/permissions', [permissionController::class, 'store'])->name('permission.store');
+
+    //* permissions routes for edit and update 
+    Route::get('/permissions/{id}/edit', [permissionController::class, 'edit'])->name('permission.edit');
+    Route::post('/permissions/{id}', [permissionController::class, 'update'])->name('permission.update');
 });
 
 require __DIR__ . '/auth.php';
