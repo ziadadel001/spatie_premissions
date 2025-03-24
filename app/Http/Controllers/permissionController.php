@@ -63,10 +63,27 @@ class permissionController extends Controller
             $permission->save();
             return redirect()->route('permission.index')->with('success', 'Permission updated successfully.');
         } else {
-            return redirect()->route('permission.edit',$id)->withInput()->withErrors($validator);
+            return redirect()->route('permission.edit', $id)->withInput()->withErrors($validator);
         }
     }
 
     //* this method will delete permission in DB
-    public function destroy() {}
+    public function destroy(Request $request)
+    {
+        $id = $request->id;
+        $permission = Permission::find($id);
+
+        if ($permission == null) {
+            session()->flash('error', 'permission not found');
+            return response()->json([
+                'status' => false
+            ]);
+        }
+
+        $permission->delete();
+        session()->flash('success', 'permission deleted successfully');
+        return response()->json([
+            'status' => true
+        ]);
+    }
 }
