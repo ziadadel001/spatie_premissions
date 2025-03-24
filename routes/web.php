@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\permissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -61,6 +62,14 @@ Route::middleware('auth')->group(function () {
 
     //* articles routes for destroy
     Route::delete('/articles', [ArticleController::class, 'destroy'])->name('article.destroy');
+
+
+
+    //* Users routes for showlist 
+    Route::get('/Users', [UserController::class, 'index'])->name('user.index');
+    //* Users routes for edit and update 
+    Route::get('/Users/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::post('/Users/{id}', [UserController::class, 'update'])->name('user.update');
 });
 
 require __DIR__ . '/auth.php';
