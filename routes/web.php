@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\permissionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,6 +31,14 @@ Route::middleware('auth')->group(function () {
 
     //* permissions routes for destroy
     Route::delete('/permissions', [permissionController::class, 'destroy'])->name('permission.destroy');
+
+
+
+
+    //* roles routes for showlist and create one
+    Route::get('/roles', [RoleController::class, 'index'])->name('role.index');
+    Route::get('/roles/create', [RoleController::class, 'create'])->name('role.create');
+    Route::post('/roles', [RoleController::class, 'store'])->name('role.store');
 });
 
 require __DIR__ . '/auth.php';
